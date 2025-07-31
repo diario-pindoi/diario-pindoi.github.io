@@ -6,119 +6,103 @@
     <meta name="description" content="Diario digital de Corpus Christi, Misiones. Noticias locales, eventos y cultura.">
     <title>PINDOI - Diario de Corpus Christi | Edición Especial</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="recursos/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="fondo"></div>
     <div class="contenido">
         <header>
-            <div class="logo-container">
-                <img src="recursos/Logo.png" alt="PINDOI - Diario de Corpus Christi" class="logo-img">
-                <p class="edicion-especial">Edición especial, Corpus Christi Misiones</p>
+            <div class="header-container">
+                <div class="logo-container">
+                    <img src="recursos/Logo.png" alt="PINDOI - Diario de Corpus Christi" class="logo-img">
+                    <p class="edicion-especial">Edición especial, Corpus Christi Misiones</p>
+                </div>
                 <div class="fecha-hora" id="fechaHora"></div>
             </div>
         </header>
 
-        <section class="portada">
-            <img src="recursos/Diario.webp" alt="Tapa del diario PINDOI - Edición especial" class="tapa">
-        </section>
-
         <main>
-            <!-- Widget del Tiempo -->
-            <article class="widget-tiempo">
-                <h2>Pronóstico del Tiempo</h2>
-                <div class="tiempo-contenido">
-                    <div class="tiempo-actual">
-                        <div class="tiempo-icono" id="tiempoIcono">⛅</div>
-                        <div class="tiempo-datos">
-                            <div class="tiempo-temperatura" id="tiempoTemperatura">22°C</div>
-                            <div class="tiempo-descripcion" id="tiempoDescripcion">Parcialmente nublado</div>
-                            <div class="tiempo-detalles">
-                                <span id="tiempoHumedad">Humedad: 65%</span>
-                                <span id="tiempoViento">Viento: 12 km/h</span>
+            <section class="portada">
+                <img src="recursos/Diario.webp" alt="Tapa del diario PINDOI - Edición especial" class="tapa">
+            </section>
+
+            <div class="contenido-principal">
+                <!-- Horóscopo -->
+                <article class="horoscopo">
+                    <h2 class="seccion-titulo">Horóscopo Diario</h2>
+                    <p class="fecha"><time datetime="2025-07-31">Jueves, 31 de Julio de 2025</time></p>
+                    <div class="signos-grid" id="signosHoroscopo">
+                        <!-- Contenido dinámico -->
+                    </div>
+                    <p class="fuente-horoscopo">Fuente: Astrología Misionera - Actualizado diariamente</p>
+                </article>
+
+                <!-- Noticia Principal -->
+                <article class="destacada">
+                    <div class="cabecera-noticia">
+                        <h1>¡Corpus Celebra la Juventud y la Cultura Local!</h1>
+                        <p class="fecha"><time datetime="2025-07-11">Corpus Christi, 11 de Julio de 2025</time></p>
+                    </div>
+                    <div class="contenido-noticia">
+                        <p>La ciudad vibró con la 3ra edición de la <strong>Feria del Libro 2025</strong>, un evento que reunió a cientos de personas en el <strong>Bachillerato Orientado Provincial N°14 "Santa Rita"</strong>. Durante toda la jornada, estudiantes, docentes y familias disfrutaron de:</p>
+                        <ul>
+                            <li><strong>Presentaciones escolares</strong>: Obras de teatro y recitales poéticos creados por alumnos.</li>
+                            <li><strong>Stands de lectura</strong>: Editoriales locales exhibieron obras de autores misioneros.</li>
+                        </ul>
+                        <p>El intendente <em>Manu Benitez</em> destacó: <q>Estos eventos fortalecen nuestra identidad y el talento de los jóvenes</q>.</p>
+                    </div>
+                    <div class="galeria">
+                        <figure>
+                            <div class="imagen-container">
+                                <img src="img/feria-libro-1.jpg" alt="Momento en que el intendente se dirige al público">
                             </div>
-                        </div>
+                            <figcaption>Momento en que el intendente se dirige brevemente al público durante la 3ª edición de la Feria del Libro.</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="imagen-container">
+                                <img src="img/presentacion-escolar-1.jpg" alt="Taller de RCP y Primeros Auxilios">
+                            </div>
+                            <figcaption>Taller Básico de RCP y Primeros Auxilios</figcaption>
+                        </figure>
                     </div>
-                    <div class="tiempo-proximas-horas" id="tiempoProximasHoras">
-                        <div class="hora-item">
-                            <span>Ahora</span>
-                            <span>22°C</span>
-                            <span>⛅</span>
-                        </div>
-                        <div class="hora-item">
-                            <span>14h</span>
-                            <span>23°C</span>
-                            <span>⛅</span>
-                        </div>
-                        <div class="hora-item">
-                            <span>15h</span>
-                            <span>24°C</span>
-                            <span>☀️</span>
-                        </div>
-                        <div class="hora-item">
-                            <span>16h</span>
-                            <span>25°C</span>
-                            <span>☀️</span>
-                        </div>
+                </article>
+
+                <!-- Noticia Clima -->
+                <article class="noticia">
+                    <h2 class="seccion-titulo">Amanecer entre niebla y mates</h2>
+                    <p class="seccion"><span>Clima</span></p>
+                    <div class="contenido-noticia">
+                        <p>El termómetro marcó <strong>7°C</strong> al amanecer, cubriendo las calles de Corpus con un manto de neblina. Vecinos compartieron imágenes en redes sociales bajo el hashtag <strong>#CorpusNeblina</strong>. Según el Servicio Meteorológico, la tarde alcanzará los <strong>15°C</strong> con cielo parcialmente nublado.</p>
                     </div>
-                </div>
-                <p class="fuente-tiempo">Datos simulados - Actualizado: <span id="tiempoActualizado"></span></p>
-            </article>
+                </article>
 
-            <!-- Noticia Principal -->
-            <article class="destacada">
-                <h1>¡Corpus Celebra la Juventud y la Cultura Local!</h1>
-                <p class="fecha"><time datetime="2025-07-11">Corpus Christi, 11 de Julio de 2025</time></p>
-                <p>La ciudad vibró con la 3ra edición de la <strong>Feria del Libro 2025</strong>, un evento que reunió a cientos de personas en el <strong>Bachillerato Orientado Provincial N°14 "Santa Rita"</strong>. Durante toda la jornada, estudiantes, docentes y familias disfrutaron de:</p>
-                <ul>
-                    <li><strong>Presentaciones escolares</strong>: Obras de teatro y recitales poéticos creados por alumnos.</li>
-                    <li><strong>Stands de lectura</strong>: Editoriales locales exhibieron obras de autores misioneros.</li>
-                </ul>
-                <p>El intendente <em>Manu Benitez</em> destacó: <q>Estos eventos fortalecen nuestra identidad y el talento de los jóvenes</q>.</p>
-                <div class="galeria">
-                    <figure>
-                        <img src="img/feria-libro-1.jpg" alt="">
-                        <figcaption>Momento en que el intendente se dirige brevemente al público durante la 3ª edición de la Feria del Libro.</figcaption>
-                    </figure>
-                    <figure>
-                        <img src="img/presentacion-escolar-1.jpg" alt="">
-                        <figcaption>Taller Básico de RCP y Primeros Auxilios</figcaption>
-                    </figure>
-                </div>
-            </article>
+                <!-- Noticia Fuente -->
+                <article class="noticia">
+                    <h2 class="seccion-titulo">Nueva fuente en Plaza San Martín</h2>
+                    <p class="seccion"><span>Urbanismo</span></p>
+                    <div class="contenido-noticia">
+                        <p>La Municipalidad confirmó la construcción de una <strong>fuente moderna</strong> en la Plaza San Martín. El proyecto incluye:</p>
+                        <ul>
+                            <li>Iluminación LED de colores.</li>
+                            <li>Jardinería con especies autóctonas.</li>
+                            <li>Espacio para eventos culturales.</li>
+                        </ul>
+                        <p>La obra comenzará en <strong>agosto de 2025</strong> y tendrá una duración estimada de tres meses.</p>
+                    </div>
+                </article>
 
-            <!-- Noticia Clima -->
-            <article class="noticia">
-                <h2>Amanecer entre niebla y mates</h2>
-                <p class="seccion"><span>Clima</span></p>
-                <p>El termómetro marcó <strong>7°C</strong> al amanecer, cubriendo las calles de Corpus con un manto de neblina. Vecinos compartieron imágenes en redes sociales bajo el hashtag <strong>#CorpusNeblina</strong>. Según el Servicio Meteorológico, la tarde alcanzará los <strong>15°C</strong> con cielo parcialmente nublado.</p>
-                <div class="clima-icono">☁</div>
-            </article>
-
-            <!-- Noticia Fuente -->
-            <article class="noticia">
-                <h2>Nueva fuente en Plaza San Martín</h2>
-                <p class="seccion"><span>Urbanismo</span></p>
-                <p>La Municipalidad confirmó la construcción de una <strong>fuente moderna</strong> en la Plaza San Martín. El proyecto incluye:</p>
-                <ul>
-                    <li>Iluminación LED de colores.</li>
-                    <li>Jardinería con especies autóctonas.</li>
-                    <li>Espacio para eventos culturales.</li>
-                </ul>
-                <p>La obra comenzará en <strong>agosto de 2025</strong> y tendrá una duración estimada de tres meses.</p>
-            </article>
-
-            <!-- Noticias Breves -->
-            <aside class="noticias-breves">
-                <h2>NOTICIAS BREVES</h2>
-                <ul>
-                    <li><strong>Caminos rurales</strong>: Finalizaron las reparaciones en Ruta 12, mejorando el acceso a las chacras.</li>
-                    <li><strong>Deportes</strong>: El equipo juvenil de fútbol venció 3-1 a Santo Pipó. Próximo partido: <time datetime="2025-07-18">18/07</time> vs. Gobernador Roca.</li>
-                    <li><strong>Seguridad vial</strong>: Nuevos carteles de tránsito instalados cerca del BOP N°14.</li>
-                    <li><strong>Cultura</strong>: Abierta la inscripción para el taller de danzas folklóricas en el Centro Cultural.</li>
-                </ul>
-            </aside>
+                <!-- Noticias Breves -->
+                <aside class="noticias-breves">
+                    <h2 class="seccion-titulo">NOTICIAS BREVES</h2>
+                    <ul>
+                        <li><strong>Caminos rurales</strong>: Finalizaron las reparaciones en Ruta 12, mejorando el acceso a las chacras.</li>
+                        <li><strong>Deportes</strong>: El equipo juvenil de fútbol venció 3-1 a Santo Pipó. Próximo partido: <time datetime="2025-07-18">18/07</time> vs. Gobernador Roca.</li>
+                        <li><strong>Seguridad vial</strong>: Nuevos carteles de tránsito instalados cerca del BOP N°14.</li>
+                        <li><strong>Cultura</strong>: Abierta la inscripción para el taller de danzas folklóricas en el Centro Cultural.</li>
+                    </ul>
+                </aside>
+            </div>
         </main>
 
         <footer>
@@ -126,6 +110,11 @@
                 <p>© 2025 PINDOI - Diario de Corpus Christi</p>
                 <div class="creditos">
                     <p>Diario virtual creado por <strong>Dilan Emanuel Enriquez</strong> para la materia de <strong>Producción Multimedial</strong>.</p>
+                </div>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </footer>
