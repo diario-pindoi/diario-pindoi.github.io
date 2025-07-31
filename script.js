@@ -29,14 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
             month: 'long', 
             day: 'numeric',
             hour: '2-digit',
-            minute: '2-digit'
+            minute: '2-digit',
+            hour12: false
         };
+        
         const ahora = new Date();
+        const fechaHora = ahora.toLocaleDateString('es-AR', opciones);
+        
         document.getElementById('fechaHora').textContent = 
-            ahora.toLocaleDateString('es-AR', opciones);
+            fechaHora.replace(/, (\d{1,2}):(\d{2})$/, ' | $1:$2');
     }
     
-    setInterval(actualizarFechaHora, 60000); // Actualizar cada minuto
+    setInterval(actualizarFechaHora, 60000);
     actualizarFechaHora();
     
     // Cargar horóscopo
@@ -143,14 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Efecto hover para elementos interactivos
-    document.querySelectorAll('.signo-item').forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
+    // Desactivar efectos hover en dispositivos táctiles
+    if (window.matchMedia("(pointer: coarse)").matches) {
+        document.querySelectorAll('.signo-item, .destacada, .noticia, .horoscopo').forEach(el => {
+            el.style.removeProperty('transform');
+            el.style.removeProperty('box-shadow');
         });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
+    }
 });
