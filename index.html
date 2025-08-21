@@ -1,118 +1,432 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Diario digital de Corpus Christi, Misiones. Noticias locales, eventos y cultura.">
-    <title>PINDOI - Diario de Corpus Christi | Edición Especial</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="recursos/favicon.ico" type="image/x-icon">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="PINDOI - Diario digital de Corpus Christi. Edición especial con reportajes largos, entrevistas y multimedia." />
+  <meta name="author" content="Dilan Emanuel Enriquez" />
+  <title>PINDOI - Diario de Corpus Christi | Edición Especial</title>
+
+  <link rel="icon" href="recursos/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="contenido">
-        <header>
-            <div class="header-container">
-                <div class="logo-container">
-                    <img src="recursos/Logo.png" alt="PINDOI - Diario de Corpus Christi" class="logo-img">
-                    <p class="edicion-especial">Edición especial, Corpus Christi Misiones</p>
+  <!-- Loader -->
+  <div id="loader" aria-hidden="true">
+    <div class="spinner" aria-label="Cargando"></div>
+    <p>Cargando edición especial…</p>
+  </div>
+
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <div class="contenido">
+    <header>
+      <div class="header-top">
+        <div class="logo-container">
+          <img src="recursos/Logo.png" alt="PINDOI - Diario de Corpus Christi" class="logo-img" width="220" height="64" />
+          <p class="edicion-especial">Edición especial, Corpus Christi • Misiones</p>
+        </div>
+        <div class="header-actions">
+          <div class="fecha-hora" id="fechaHora" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Menú principal">
+        <ul class="nav-list">
+          <li><a href="#p1" data-goto="1">Portada</a></li>
+          <li><a href="#p2" data-goto="2">Editorial</a></li>
+          <li><a href="#p3" data-goto="3">Breves</a></li>
+          <li><a href="#p4" data-goto="4">Deportes</a></li>
+          <li><a href="#p5" data-goto="5">Cultura</a></li>
+          <li><a href="#p6" data-goto="6">Educación</a></li>
+          <li><a href="#p7" data-goto="7">Entrevistas</a></li>
+          <li><a href="#p8" data-goto="8">Opinión</a></li>
+          <li><a href="#p9" data-goto="9">Agenda</a></li>
+          <li><a href="#p10" data-goto="10">Feria del Libro</a></li>
+          <li><a href="#p11" data-goto="11">Salud</a></li>
+          <li><a href="#p12" data-goto="12">Historia</a></li>
+          <li><a href="#p13" data-goto="13">Turismo</a></li>
+          <li><a href="#p14" data-goto="14">Clima</a></li>
+          <li><a href="#p15" data-goto="15">Urbanismo</a></li>
+          <li><a href="#p16" data-goto="16">Multimedia</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- Portada: solo imagen -->
+      <section class="portada" aria-label="Portada">
+        <img src="recursos/Diario.webp" alt="Tapa del diario PINDOI - Edición especial" class="tapa" width="1200" height="675" loading="eager" />
+      </section>
+
+      <!-- Paginador -->
+      <nav class="navegacion-paginas" aria-label="Paginación">
+        <button id="btnPaginaAnterior" class="btn-pagina" disabled aria-label="Página anterior">← Anterior</button>
+        <div class="paginador-numerico" role="tablist" aria-label="Selector de página"></div>
+        <span class="indicador-pagina">Página <span id="paginaActual">1</span> de <span id="totalPaginas">16</span></span>
+        <button id="btnPaginaSiguiente" class="btn-pagina" aria-label="Página siguiente">Siguiente →</button>
+      </nav>
+
+      <div class="contenido-principal" id="contenedorPaginas">
+
+        <!-- Página 1 (introducción) -->
+        <div class="pagina pagina-activa" data-pagina="1" id="p1">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Edición Nº 001 — Jueves 11 de julio de 2025</h2>
+            <div class="contenido-noticia">
+              <p>Bienvenidos a PINDOI, el diario comunitario de Corpus Christi. Esta edición especial reúne crónicas, reportajes y entrevistas para reflejar la vida cultural, deportiva y social de la ciudad. Navegá las secciones con el paginador o el menú superior.</p>
+              <p>En este número profundizamos en la Feria del Libro, proyectos educativos, iniciativas de salud y el plan de revitalización de la Plaza San Martín. Cada sección ofrece contexto, voces locales y datos que permitan comprender tanto el presente como las posibilidades de futuro.</p>
+              <p>Si querés colaborar con material —fotos, audios, documentos— escribinos a <a href="mailto:contacto@pindoi.local">contacto@pindoi.local</a>. Valoramos el periodismo colaborativo y la participación ciudadana.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 2 — Editorial (muy extenso) -->
+        <div class="pagina" data-pagina="2" id="p2">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Editorial — Cultura y juventud: el motor de Corpus</h2>
+            <div class="contenido-noticia">
+              <p>En los últimos años, la escena cultural de Corpus ha mostrado un crecimiento sostenido. Eventos escolares, ferias y peñas han servido como plataformas para que adolescentes y jóvenes ejerciten liderazgo, organización y creación. La escuela pública, cada vez con mayor protagonismo, ha abierto sus puertas a propuestas artísticas que antes quedaban en espacios privados.</p>
+
+              <h3>La continuidad como política</h3>
+              <p>Una política cultural no es únicamente la realización de un evento; es la articulación de recursos, formación docente, infraestructura y comunicación. La continuidad permite sostener las redes de trabajo que generan empleo cultural y oportunidades de participación.</p>
+
+              <h3>Resultados tangibles</h3>
+              <p>Los efectos no son abstractos: más inscripciones en talleres, más clubes deportivos activos y mayor circulación de producción artesanal se traducen en dinamismo económico y cohesión social. Además, la participación juvenil tiene impacto en la prevención de riesgos y en la formación de ciudadanía.</p>
+
+              <h3>Propuesta</h3>
+              <p>Desde este espacio proponemos una mesa permanente entre municipios, escuelas y organizaciones civiles para planificar un calendario anual, líneas de financiamiento y capacitación. La experiencia demuestra que lo sostenido, acompañado por recursos estratégicos, multiplica resultados.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 3 — Noticias breves (muy ampliadas, con contexto y datos) -->
+        <div class="pagina" data-pagina="3" id="p3">
+          <aside class="noticias-breves obs">
+            <h2 class="seccion-titulo">Noticias breves — Actualidad y contexto</h2>
+            <div class="contenido-noticia">
+              <h3>Caminos rurales: intervención inmediata</h3>
+              <p>La Dirección de Vialidad local informó el cierre exitoso de la primera etapa de bacheo en la Ruta 12 y accesos a chacras. Se priorizaron tramos críticos que afectan la logística de cosecha y transporte. El municipio comunicó que las obras continuarán en forma rotativa según estado climático y presupuesto.</p>
+
+              <h3>Seguridad vial y educación</h3>
+              <p>En coordinación con la Policía local se instalaron señales y reductores de velocidad en la zona educativa. Además, se programaron charlas educativas con simulaciones de prácticas seguras para conductores y estudiantes.</p>
+
+              <h3>Talleres y formación</h3>
+              <p>El Centro Cultural ofrece cursos gratuitos con cupos limitados. Los talleres incluyen capacitación docente, formación en gestión cultural y promoción de emprendimientos. Desde PINDOI recomendamos preinscribirse por correo o teléfono para asegurar la vacante.</p>
+
+              <h3>Economía local</h3>
+              <p>Un programa de microcréditos para emprendedores gastronómicos fue anunciado con una línea inicial de apoyo que incluye asesoramiento sobre costos y habilitaciones sanitarias. La iniciativa busca formalizar puestos de venta y fortalecer cadenas de valor locales.</p>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Página 4 — Deportes (extenso con estadísticas y formación) -->
+        <div class="pagina" data-pagina="4" id="p4">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Deportes — Crónica completa y desarrollo formativo</h2>
+            <div class="contenido-noticia">
+              <h3>Crónica: Corpus 3–1 Santo Pipó</h3>
+              <p>El encuentro se jugó en la cancha municipal con una asistencia aproximada de 850 espectadores. Benítez (18') abrió el marcador, la visita descontó en el minuto 34 y en el complemento Rojas (62') y Silva (78') sentenciaron la victoria para Corpus. El arquero local, Gonzalo Méndez, atajó un penal en el cierre del primer tiempo y fue elegido la figura del partido por votación popular.</p>
+
+              <h3>Estadísticas relevantes</h3>
+              <ul>
+                <li>Posesión estimada: Corpus 54% – Santo Pipó 46%.</li>
+                <li>Tiros al arco: Corpus 9 (5 al arco) – Santo Pipó 7 (3 al arco).</li>
+                <li>Faltas acumuladas: Corpus 8 – Santo Pipó 12.</li>
+              </ul>
+
+              <h3>Desarrollo formativo</h3>
+              <p>Las divisiones inferiores completaron encuentros amistosos. El coordinador del fútbol juvenil destacó el plan de entrenamiento enfocado en trabajo físico, técnica individual y formación en valores. Además, las escuelas deportivas abrieron inscripciones para vóley y básquet con cupos subvencionados.</p>
+
+              <h3>Agenda deportiva</h3>
+              <p>Próximo match local: vs. Gobernador Roca, estadio municipal, viernes 18 - entradas disponibles en boletería y online.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 5 — Cultura (ampliada: artistas, metodología, impacto) -->
+        <div class="pagina" data-pagina="5" id="p5">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Cultura — Programación, artistas y efectos sociales</h2>
+            <div class="contenido-noticia">
+              <h3>Programación de la peña</h3>
+              <p>La peña reunirá a músicos locales, ballets escolares y narradores orales. Además se ofrecerán microtalleres de elaboración de instrumentos tradicionales y una mesa de diálogo sobre la transmisión intergeneracional de repertorios folklóricos.</p>
+
+              <h3>Artistas destacados</h3>
+              <p>Participarán Los Hermanos R. (música), el Ballet Santa Rita y varios solistas que han trabajado con conservatorios regionales. Los artistas locales subrayan la importancia de espacios públicos accesibles para la consolidación de audiencias.</p>
+
+              <h3>Impacto cultural y económico</h3>
+              <p>Las actividades incrementan la demanda por ferias y gastronomía local, generando microingresos para artesanos y emprendedores. Se recomienda que la Municipalidad evalúe incentivos fiscales temporales y apoyo logístico para potenciar la actividad cultural como motor económico.</p>
+
+              <h3>Acceso y participación</h3>
+              <p>Se garantizará accesibilidad en el Centro Cultural y habrá entradas gratuitas para estudiantes. Las actividades para niños incluyen adaptación pedagógica con mediadores culturales formados.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 6 — Educación (proyectos, metodología, alianzas) -->
+        <div class="pagina" data-pagina="6" id="p6">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Educación — Proyectos escolares: ciencia, tecnología y vinculación comunitaria</h2>
+            <div class="contenido-noticia">
+              <h3>Descripción de proyectos</h3>
+              <p>Los estudiantes del BOP N.º 14 presentaron prototipos de paneles solares a escala, un vehículo para monitoreo de huertas escolares y pequeños robots programables. Cada proyecto incorpora aprendizaje en matemática aplicada, electrónica básica y metodología de proyecto.</p>
+
+              <h3>Metodología y resultados</h3>
+              <p>Los proyectos se desarrollaron con la metodología de aprendizaje por proyectos (ABP), que privilegia la resolución de problemas reales, documentación y presentación. Los alumnos elaboraron informes técnicos, maquetas y demostraciones prácticas que han llamado la atención de escuelas rurales que solicitan replicar las experiencias.</p>
+
+              <h3>Alianzas y formación docente</h3>
+              <p>El municipio coordinó la donación de microcontroladores y la realización de talleres para docentes. Instituciones técnicas de la provincia colaboraron con capacitaciones específicas para incorporar robótica en la currícula escolar.</p>
+
+              <h3>Propuesta de continuidad</h3>
+              <p>Se propone crear una red inter-escolar para compartir recursos, un fondo local para mantenimiento de equipos y una muestra anual itinerante que acercaría estos proyectos a localidades rurales cercanas.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 7 — Entrevistas (formato Q&A, testimonios largos) -->
+        <div class="pagina" data-pagina="7" id="p7">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Entrevistas — Voces que hacen: jóvenes, docentes y organizadores</h2>
+            <div class="contenido-noticia">
+              <h3>Agustina (16) — promotora de lectura</h3>
+              <p><strong>Pregunta:</strong> ¿Cómo nació el taller de lectura?</p>
+              <p><strong>Respuesta:</strong> “Comenzó con una idea entre amigos. Queríamos que los más chicos tuvieran acceso a libros diferentes a los de la escuela. Empezamos con cinco chicos en mi casa y ahora nos reunimos en la biblioteca cada miércoles con más de 20 participantes.”</p>
+
+              <h3>Matías (17) — microediciones</h3>
+              <p><strong>Pregunta:</strong> ¿Qué resultados tuvieron al publicar sus cuadernillos?</p>
+              <p><strong>Respuesta:</strong> “Vendimos algunos cuadernillos en la feria y la experiencia motivó a otros chicos a escribir. El apoyo docente fue clave para revisar textos y diseñar las portadas.”</p>
+
+              <h3>Docente coordinadora — Laura F.</h3>
+              <p>Laura destaca el impacto en la autoestima de los alumnos: “Ver su trabajo en un espacio público transforma la relación con la escuela. Pasan de ser consumidores a productores culturales”.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 8 — Opinión (varias columnas y análisis) -->
+        <div class="pagina" data-pagina="8" id="p8">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Opinión — Ensayos sobre comunidad, política y cultura</h2>
+            <div class="contenido-noticia">
+              <h3>Columna: Pequeñas iniciativas, grandes efectos</h3>
+              <p>Los proyectos que arrancan con pocos recursos, pero con compromiso, generan externalidades positivas: redes vecinales más fuertes, mayor colaboración interinstitucional y oportunidades para jóvenes. El rol del periodismo local es documentar estos procesos y ayudar a visibilizar sus necesidades.</p>
+
+              <h3>Columna: La escuela en clave comunitaria</h3>
+              <p>La apertura de la escuela a propuestas culturales y deportivas es un activo que debe protegerse. Recomendamos políticas que incentiven la multiplicación de talleres y establezcan líneas de apoyo permanentes para docentes gestores culturales.</p>
+
+              <h3>Editorial complementario</h3>
+              <p>La inversión en cultura y educación no es un gasto, es apuesta por capital humano y calidad de vida. La evidencia local muestra retornos sociales que necesitan continuidad presupuestaria y planificación estratégica.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 9 — Agenda (detallada por día, descripción y contactos) -->
+        <div class="pagina" data-pagina="9" id="p9">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Agenda completa — Eventos, inscripciones y contactos</h2>
+            <div class="contenido-noticia">
+              <h3>Martes</h3>
+              <p><strong>19:00</strong> Taller de fotografía móvil — Centro Cultural. Actividad práctica; llevar celular y cargador. Inscripción: culturacorpus@local (cupos limitados).</p>
+
+              <h3>Miércoles</h3>
+              <p><strong>17:00</strong> Club de lectura juvenil — Biblioteca Popular. Encuentro con debate y escritura de microrelatos. Coordinación: biblioteca@pindoi.local.</p>
+
+              <h3>Jueves</h3>
+              <p><strong>18:00</strong> Encuentro de ajedrez escolar — Biblioteca. Modalidad rápida; partidas de 15 minutos.</p>
+
+              <h3>Viernes</h3>
+              <p><strong>20:30</strong> Festival de bandas locales — Plaza San Martín. Puestos de gastronomía y feria de discos independientes.</p>
+
+              <p>Para más información y reservas contactá a la Secretaría de Cultura o consultá el perfil oficial en redes.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 10 — Feria del Libro (reportaje extenso con recursos) -->
+        <div class="pagina" data-pagina="10" id="p10">
+          <article class="destacada obs">
+            <div class="cabecera-noticia">
+              <h2 class="seccion-titulo">Reportaje — Feria del Libro 2025: organización, protagonistas y repercusiones</h2>
+              <p class="fecha"><time datetime="2025-07-11">11 de julio de 2025</time></p>
+            </div>
+            <div class="contenido-noticia">
+              <p>La Feria del Libro se consolidó como un espacio de encuentro entre autores, lectores y proyectos educativos. Hubo mesas redondas con escritores del litoral, talleres de escritura creativa para jóvenes y un circuito de narración oral para niños.</p>
+
+              <h3>Organización y logística</h3>
+              <p>La organización fue coordinada por la Dirección de Cultura y la comunidad educativa del BOP N.º 14. Se establecieron protocolos de circulación, puntos informativos y un área para edición y venta al público de microediciones estudiantiles.</p>
+
+              <h3>Protagonistas</h3>
+              <p>Autores locales presentaron obras sobre historia regional, relatos autobiográficos y cuentos para niños. La participación de editoriales independientes permitió el contacto entre escritores y salas de lectura para el público general.</p>
+
+              <h3>Impacto educativo</h3>
+              <p>Los talleres tuvieron cupos completos y se destacaron las actividades de animación de lectura en bibliotecas escolares. Docentes señalaron que la feria incentivó proyectos de lectura sostenida en las aulas.</p>
+
+              <h3>Balance y perspectivas</h3>
+              <p>Los organizadores anticiparon la programación para la próxima edición con más énfasis en ferias en espacios rurales, ampliación de stands y acceso a microbecas para autores emergentes.</p>
+            </div>
+
+            <div class="galeria">
+              <figure class="obs">
+                <div class="imagen-container">
+                  <img src="img/feria-libro-1.jpg" alt="Escena de la Feria del Libro" loading="lazy" />
                 </div>
-                <div class="fecha-hora" id="fechaHora"></div>
-            </div>
-        </header>
+                <figcaption>Stands, lectores y actividades en el BOP N.º 14.</figcaption>
+              </figure>
 
-        <main>
-            <section class="portada">
-                <img src="recursos/Diario.webp" alt="Tapa del diario PINDOI - Edición especial" class="tapa">
-            </section>
-
-            <div class="contenido-principal">
-                <!-- Horóscopo -->
-                <article class="horoscopo">
-                    <h2 class="seccion-titulo">Horóscopo Diario</h2>
-                    <p class="fecha"><time datetime="2025-07-31">Jueves, 31 de Julio de 2025</time></p>
-                    <div class="signos-grid" id="signosHoroscopo">
-                        <!-- Contenido dinámico -->
-                    </div>
-                    <p class="fuente-horoscopo">Fuente: Astrología Misionera - Actualizado diariamente</p>
-                </article>
-
-                <!-- Noticia Principal -->
-                <article class="destacada">
-                    <div class="cabecera-noticia">
-                        <h1>¡Corpus Celebra la Juventud y la Cultura Local!</h1>
-                        <p class="fecha"><time datetime="2025-07-11">Corpus Christi, 11 de Julio de 2025</time></p>
-                    </div>
-                    <div class="contenido-noticia">
-                        <p>La ciudad vibró con la 3ra edición de la <strong>Feria del Libro 2025</strong>, un evento que reunió a cientos de personas en el <strong>Bachillerato Orientado Provincial N°14 "Santa Rita"</strong>. Durante toda la jornada, estudiantes, docentes y familias disfrutaron de:</p>
-                        <ul>
-                            <li><strong>Presentaciones escolares</strong>: Obras de teatro y recitales poéticos creados por alumnos.</li>
-                            <li><strong>Stands de lectura</strong>: Editoriales locales exhibieron obras de autores misioneros.</li>
-                        </ul>
-                        <p>El intendente <em>Manu Benitez</em> destacó: <q>Estos eventos fortalecen nuestra identidad y el talento de los jóvenes</q>.</p>
-                    </div>
-                    <div class="galeria">
-                        <figure>
-                            <div class="imagen-container">
-                                <img src="img/feria-libro-1.jpg" alt="Momento en que el intendente se dirige al público">
-                            </div>
-                            <figcaption>Momento en que el intendente se dirige brevemente al público durante la 3ª edición de la Feria del Libro.</figcaption>
-                        </figure>
-                        <figure>
-                            <div class="imagen-container">
-                                <img src="img/presentacion-escolar-1.jpg" alt="Taller de RCP y Primeros Auxilios">
-                            </div>
-                            <figcaption>Taller Básico de RCP y Primeros Auxilios</figcaption>
-                        </figure>
-                    </div>
-                </article>
-
-                <!-- Noticia Clima -->
-                <article class="noticia">
-                    <h2 class="seccion-titulo">Amanecer entre niebla y mates</h2>
-                    <p class="seccion"><span>Clima</span></p>
-                    <div class="contenido-noticia">
-                        <p>El termómetro marcó <strong>7°C</strong> al amanecer, cubriendo las calles de Corpus con un manto de neblina. Vecinos compartieron imágenes en redes sociales bajo el hashtag <strong>#CorpusNeblina</strong>. Según el Servicio Meteorológico, la tarde alcanzará los <strong>15°C</strong> con cielo parcialmente nublado.</p>
-                    </div>
-                </article>
-
-                <!-- Noticia Fuente -->
-                <article class="noticia">
-                    <h2 class="seccion-titulo">Nueva fuente en Plaza San Martín</h2>
-                    <p class="seccion"><span>Urbanismo</span></p>
-                    <div class="contenido-noticia">
-                        <p>La Municipalidad confirmó la construcción de una <strong>fuente moderna</strong> en la Plaza San Martín. El proyecto incluye:</p>
-                        <ul>
-                            <li>Iluminación LED de colores.</li>
-                            <li>Jardinería con especies autóctonas.</li>
-                            <li>Espacio para eventos culturales.</li>
-                        </ul>
-                        <p>La obra comenzará en <strong>agosto de 2025</strong> y tendrá una duración estimada de tres meses.</p>
-                    </div>
-                </article>
-
-                <!-- Noticias Breves -->
-                <aside class="noticias-breves">
-                    <h2 class="seccion-titulo">NOTICIAS BREVES</h2>
-                    <ul>
-                        <li><strong>Caminos rurales</strong>: Finalizaron las reparaciones en Ruta 12, mejorando el acceso a las chacras.</li>
-                        <li><strong>Deportes</strong>: El equipo juvenil de fútbol venció 3-1 a Santo Pipó. Próximo partido: <time datetime="2025-07-18">18/07</time> vs. Gobernador Roca.</li>
-                        <li><strong>Seguridad vial</strong>: Nuevos carteles de tránsito instalados cerca del BOP N°14.</li>
-                        <li><strong>Cultura</strong>: Abierta la inscripción para el taller de danzas folklóricas en el Centro Cultural.</li>
-                    </ul>
-                </aside>
-            </div>
-        </main>
-
-        <footer>
-            <div class="footer-content">
-                <p>© 2025 PINDOI - Diario de Corpus Christi</p>
-                <div class="creditos">
-                    <p>Diario virtual creado por <strong>Dilan Emanuel Enriquez</strong> para la materia de <strong>Producción Multimedial</strong>.</p>
+              <figure class="obs">
+                <div class="imagen-container">
+                  <img src="img/presentacion-escolar-1.jpg" alt="Presentación escolar" loading="lazy" />
                 </div>
+                <figcaption>Presentaciones escolares y mesas de diálogo.</figcaption>
+              </figure>
             </div>
-        </footer>
-    </div>
-    <script src="script.js"></script>
+          </article>
+        </div>
+
+        <!-- Página 11 — Salud (ampliado con programas y recomendaciones) -->
+        <div class="pagina" data-pagina="11" id="p11">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Salud — Programas, campañas y formación comunitaria</h2>
+            <div class="contenido-noticia">
+              <h3>Campaña de hábitos saludables</h3>
+              <p>Las jornadas incluyeron controles nutricionales, medición de glucemia y presión arterial, y charlas sobre actividad física. Profesionales recomendaron pautas concretas para diferentes edades y promovieron grupos de caminata comunitarios.</p>
+
+              <h3>Taller de RCP y emergencias</h3>
+              <p>Se realizaron prácticas de RCP en maniquíes y simulaciones de atención inicial. El objetivo fue capacitar a docentes, vecinos y comerciantes para reducir tiempos de respuesta antes de la llegada de servicios de emergencia.</p>
+
+              <h3>Salud mental</h3>
+              <p>Se presentaron recursos de apoyo psicológico y propuestas para crear grupos de escucha en escuelas. El municipio trabaja en un plan para incorporar espacios de contención y prevención en adolescentes.</p>
+
+              <h3>Recomendaciones prácticas</h3>
+              <ul>
+                <li>Hidratación adecuada, especialmente en actividades al aire libre.</li>
+                <li>Revisión médica periódica para personas mayores y con factores de riesgo.</li>
+                <li>Participación en talleres de primeros auxilios para comerciantes y líderes comunitarios.</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 12 — Historia (extenso con testimonios y plan museográfico) -->
+        <div class="pagina" data-pagina="12" id="p12">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Historia local — Archivo comunitario y proyecto de museo</h2>
+            <div class="contenido-noticia">
+              <h3>Recopilación histórica</h3>
+              <p>Familias donaron fotografías, cartas y objetos que documentan la vida cotidiana de las primeras décadas del pueblo. El archivo inicial contiene material fotográfico, documentos comerciales y relatos orales grabados.</p>
+
+              <h3>Proyecto museográfico</h3>
+              <p>Se propone un museo comunitario con salas temáticas: fundación y colonización, oficios tradicionales, educación y cultura popular. La muestra sería itinerante para acercarla a escuelas rurales.</p>
+
+              <h3>Actividades educativas</h3>
+              <p>El proyecto incluye ciclos de talleres escolares, programas de voluntariado y una plataforma digital donde se puedan consultar fotografías y testimonios con fines pedagógicos.</p>
+
+              <h3>Participación ciudadana</h3>
+              <p>Se convocará a comités de trabajo para catalogar y digitalizar material, con presencia de historiadores locales y estudiantes de turismo o patrimonio.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 13 — Turismo (itinerarios, recomendaciones y oferta) -->
+        <div class="pagina" data-pagina="13" id="p13">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Turismo — Itinerarios, sabores y experiencias locales</h2>
+            <div class="contenido-noticia">
+              <h3>Itinerario sugerido (un día)</h3>
+              <ol>
+                <li>Mañana: paseo en bicicleta por caminos rurales y visita a chacra productora.</li>
+                <li>Mediodía: almuerzo con productos regionales (pescado de río, chipa, mbeyú).</li>
+                <li>Tarde: visita a mirador y recorrido por el centro histórico.</li>
+              </ol>
+
+              <h3>Ofertas y servicios</h3>
+              <p>Pequeños alojamientos ofrecen paquetes con actividades guiadas; se recomienda reservar con antelación en fines de semana largos. Los tours incluyen guías locales y degustaciones.</p>
+
+              <h3>Recomendaciones de conservación</h3>
+              <p>Respetar señalización, no dejar residuos y respetar horarios de descanso en zonas rurales. Se promueven circuitos de bajo impacto ambiental.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 14 — Clima (consejos, datos y registro) -->
+        <div class="pagina" data-pagina="14" id="p14">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Clima — Registro y recomendaciones</h2>
+            <div class="contenido-noticia">
+              <p>La mañana comenzó con neblina y una mínima de 7 °C. El registro local indica noches frías y máxima prevista de 15 °C para la tarde. El fenómeno de neblina es común en esta época y afecta la visibilidad en rutas secundarias.</p>
+
+              <h3>Recomendaciones</h3>
+              <ul>
+                <li>Mañanas con visibilidad reducida: encender luces y reducir velocidad en rutas.</li>
+                <li>Vestirse por capas para enfrentar la diferencia térmica entre mañana y tarde.</li>
+                <li>Atención a caminos no pavimentados que pueden presentar superficies resbaladizas.</li>
+              </ul>
+
+              <h3>Registro climático local</h3>
+              <p>La estación municipal registra temperatura, humedad y velocidad del viento; datos que se usan para planificar trabajos rurales y actividades al aire libre.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 15 — Urbanismo (presupuesto, fases y participación) -->
+        <div class="pagina" data-pagina="15" id="p15">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Urbanismo — Plan de intervención en Plaza San Martín</h2>
+            <div class="contenido-noticia">
+              <h3>Alcance del proyecto</h3>
+              <p>El proyecto incluye la construcción de una fuente central, renovación de luminarias por tecnología LED, nuevas plantaciones con especies autóctonas y mobiliario urbano accesible. Se integra un pequeño anfiteatro para presentaciones al aire libre.</p>
+
+              <h3>Fases y tiempos</h3>
+              <p>La obra se proyecta en tres fases: diseño participativo (1 mes), ejecución de obra (3 meses) y puesta en servicio con programación cultural (fase continua). Se contempla un cronograma que minimice impacto en la actividad comercial del centro.</p>
+
+              <h3>Presupuesto y financiamiento</h3>
+              <p>El presupuesto estimado incluye inversión municipal y fondos provinciales; además se evaluará la posibilidad de apoyo de organismos de cooperación para componentes culturales.</p>
+
+              <h3>Participación ciudadana</h3>
+              <p>Se convocará a audiencias públicas y talleres de diseño con comerciantes y vecinos para ajustar programación y asegurar accesibilidad universal.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Página 16 — Multimedia (instrucciones, clips y participación) -->
+        <div class="pagina" data-pagina="16" id="p16">
+          <article class="noticia obs">
+            <h2 class="seccion-titulo">Multimedia — Galería, podcasts y cómo participar</h2>
+            <div class="contenido-noticia">
+              <h3>Galería seleccionada</h3>
+              <p>Imágenes de la Feria del Libro, deportes y escenas cotidianas conforman la galería. Cada imagen incluye pie de foto, crédito y contexto breve. En la web local podrás descargar resoluciones optimizadas para uso educativo.</p>
+
+              <h3>Podcast comunitario</h3>
+              <p>Grabamos entrevistas en formato audio: testimonios de docentes, estudiantes y autoridades. Los episodios duran entre 6 y 12 minutos y están pensados para escucha móvil y difusión en redes.</p>
+
+              <h3>Cómo enviar material</h3>
+              <p>Podés enviar fotos y audios desde el formulario en nuestra web o por correo a <a href="mailto:multimedia@pindoi.local">multimedia@pindoi.local</a>. Indicá lugar, fecha y una breve descripción. Seleccionaremos y daremos crédito a los autores.</p>
+
+              <h3>Derechos y uso</h3>
+              <p>Todo material enviado será usado con autorización explícita; respetamos derechos de autor y pedimos autorización escrita para reproducción en redes o materiales impresos.</p>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p>© 2025 PINDOI — Diario de Corpus Christi</p>
+        <div class="creditos">
+          <p>Diario virtual creado por <strong>Dilan Emanuel Enriquez</strong> para la materia de <strong>Producción Multimedial</strong>.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Botón ir arriba -->
+  <button id="btnTop" class="btn-top" aria-label="Ir arriba">↑</button>
+
+  <script src="script.js"></script>
 </body>
 </html>
