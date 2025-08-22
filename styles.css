@@ -69,18 +69,20 @@ header {
   gap: 1rem;
   text-align: center;
 }
-.logo-container { flex: 1; }
+.logo-container { flex: 1; display:flex; flex-direction:column; align-items:center; }
 .logo-img { max-width: 220px; height: auto; }
-.edicion-especial { font-size: .9rem; opacity: .9; }
+.edicion-especial { font-size: .9rem; opacity: .9; margin-top:.3rem; }
 
 /* ==============================
    Botón hamburguesa
 ============================== */
 .nav-toggle {
   display: none;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: .35rem .5rem;
+  border-radius: 8px;
+  font-size: 1.3rem;
   color: #fff;
   cursor: pointer;
 }
@@ -112,6 +114,18 @@ header {
   background: var(--color-secondary);
   outline: none;
 }
+
+/* Overlay (fondo detrás del menú móvil) */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+  z-index: 1000;
+}
+.nav-overlay.show { opacity: 1; visibility: visible; }
 
 /* ==============================
    Portada
@@ -245,7 +259,7 @@ footer {
   cursor: pointer;
   display: none;
   box-shadow: var(--shadow);
-  z-index: 1000;
+  z-index: 1001;
 }
 .btn-top.show { display: block; }
 
@@ -257,31 +271,36 @@ footer {
   .logo-img { max-width: 180px; }
 }
 @media (max-width: 768px) {
-  .nav-toggle { display: block; margin-left: auto; }
+  .nav-toggle { display: inline-flex; align-items:center; justify-content:center; }
 
+  /* menú lateral móvil */
   .nav-list {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;
+    width: 78%;
     height: 100%;
     flex-direction: column;
-    background: var(--color-primary);
-    padding: 2rem 1rem;
+    background: linear-gradient(180deg, rgba(44,62,80,0.98), rgba(26,37,47,0.98));
+    padding: 2.5rem 1.2rem;
     gap: 1rem;
     align-items: flex-start;
-    transition: right 0.3s ease;
-    box-shadow: -4px 0 10px rgba(0,0,0,.3);
-    z-index: 999;
+    transition: right 0.28s cubic-bezier(.2,.9,.2,1);
+    box-shadow: -6px 0 18px rgba(0,0,0,.35);
+    z-index: 1002;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav-list.show { right: 0; }
 
   .nav-list a {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     width: 100%;
-    padding: .7rem 1rem;
-    border-radius: 6px;
-    background: rgba(255,255,255,.08);
+    padding: .8rem 1rem;
+    border-radius: 8px;
+    background: rgba(255,255,255,.04);
+    color: #fff;
+    text-align: left;
   }
 
   .contenido-principal { padding: 1rem; }
