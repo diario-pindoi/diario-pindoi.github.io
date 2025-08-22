@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!img.loading) img.loading = 'lazy';
   });
 
-  // --- IntersectionObserver para revelar elementos (evita contenido "en blanco") ---
+  // --- IntersectionObserver para revelar elementos ---
   const io = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll('.obs').forEach(el => io.observe(el));
 
   // --- Paginación ---
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   crearPills();
 
-  // Revelar elementos dentro de una pagina (stagger)
+  // Revelar elementos dentro de una pagina
   function revealElementsInPage(pageNum){
     const selector = `.pagina[data-pagina="${pageNum}"] .obs`;
     const elems = Array.from(document.querySelectorAll(selector));
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Scroll al contenedor y foco al título
+  // Scroll y foco
   function scrollToContentAndFocus(pageNum){
     if (contenedorPaginas) {
       contenedorPaginas.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -104,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 360);
   }
 
-  // Cambiar de página (principal)
+  // Cambiar de página
   function cambiarPagina(nueva){
     if (nueva < 1 || nueva > totalPaginas) return;
     paginas.forEach(p => p.classList.remove('pagina-activa'));
@@ -121,40 +120,38 @@ document.addEventListener('DOMContentLoaded', () => {
       b.setAttribute('aria-selected', String(sel));
     });
 
-    // actualizar hash sin forzar scroll del navegador
     history.replaceState(null, '', `#p${paginaActual}`);
 
-    // revelar contenido de la pagina y desplazarse al contenedor (evita "irse al inicio")
     revealElementsInPage(paginaActual);
     scrollToContentAndFocus(paginaActual);
   }
 
-  // Prev / Next
   if (btnPrev) btnPrev.addEventListener('click', ()=> cambiarPagina(paginaActual - 1));
   if (btnNext) btnNext.addEventListener('click', ()=> cambiarPagina(paginaActual + 1));
 
-  // Atajos con flechas
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') cambiarPagina(paginaActual - 1);
     if (e.key === 'ArrowRight') cambiarPagina(paginaActual + 1);
   });
 
-  // Enlaces del menu
   document.querySelectorAll('a[data-goto]').forEach(a => {
     a.addEventListener('click', (ev) => {
       ev.preventDefault();
       const n = Number(a.getAttribute('data-goto')) || 1;
       cambiarPagina(n);
+
+      // cerrar menú en móviles al hacer clic
+      if (window.innerWidth <= 768) {
+        navList.classList.remove('show');
+      }
     });
   });
 
-  // Si hay hash al cargar, abrir esa página
   if (location.hash && /^#p(\d+)$/.test(location.hash)){
     const n = Number(location.hash.replace('#p',''));
     if (n >= 1 && n <= totalPaginas) cambiarPagina(n);
     else cambiarPagina(1);
   } else {
-    // inicial
     cambiarPagina(1);
   }
 
@@ -163,5 +160,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleTop(){ if (window.scrollY > 450) btnTop.classList.add('show'); else btnTop.classList.remove('show'); }
   window.addEventListener('scroll', toggleTop);
   if (btnTop) btnTop.addEventListener('click', ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // --- Menú hamburguesa ---
+  const navToggle = document.querySelector('.nav-toggle');
+  const navList = document.querySelector('.nav-list');
+  if(navToggle && navList){
+    navToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+    });
+  }
 
 });

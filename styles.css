@@ -58,6 +58,8 @@ header {
   color: #fff;
   padding: 1rem;
   box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1000;
 }
 .header-top {
   display: flex;
@@ -72,11 +74,21 @@ header {
 .edicion-especial { font-size: .9rem; opacity: .9; }
 
 /* ==============================
+   Botón hamburguesa
+============================== */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ==============================
    Navegación
 ============================== */
-.nav {
-  margin-top: 1rem;
-}
+.nav { margin-top: 1rem; }
 .nav-list {
   list-style: none;
   display: flex;
@@ -139,10 +151,7 @@ header {
   transition: var(--transition);
 }
 .btn-pagina:disabled { background: #aaa; cursor: not-allowed; }
-.indicador-pagina {
-  font-weight: bold;
-  font-size: .95rem;
-}
+.indicador-pagina { font-weight: bold; font-size: .95rem; }
 .paginador-numerico {
   display: flex;
   flex-wrap: wrap;
@@ -248,8 +257,33 @@ footer {
   .logo-img { max-width: 180px; }
 }
 @media (max-width: 768px) {
-  .nav-list { flex-direction: column; align-items: center; }
-  .nav-list a { width: 100%; text-align: center; }
+  .nav-toggle { display: block; margin-left: auto; }
+
+  .nav-list {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    flex-direction: column;
+    background: var(--color-primary);
+    padding: 2rem 1rem;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 10px rgba(0,0,0,.3);
+    z-index: 999;
+  }
+  .nav-list.show { right: 0; }
+
+  .nav-list a {
+    font-size: 1.1rem;
+    width: 100%;
+    padding: .7rem 1rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,.08);
+  }
+
   .contenido-principal { padding: 1rem; }
 }
 @media (max-width: 480px) {
