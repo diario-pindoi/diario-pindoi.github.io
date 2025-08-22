@@ -18,14 +18,8 @@
 /* ==============================
    Reset básico
 ============================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-base);
   color: var(--color-text);
@@ -54,9 +48,7 @@ body {
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 /* ==============================
    Encabezado
@@ -69,18 +61,15 @@ header {
 }
 .header-top {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   text-align: center;
 }
-.logo-img {
-  max-width: 200px;
-  margin-bottom: .5rem;
-}
-.edicion-especial {
-  font-size: .9rem;
-  opacity: .9;
-}
+.logo-container { flex: 1; }
+.logo-img { max-width: 220px; height: auto; }
+.edicion-especial { font-size: .9rem; opacity: .9; }
 
 /* ==============================
    Navegación
@@ -99,11 +88,11 @@ header {
 .nav-list a {
   display: inline-block;
   background: rgba(255,255,255,.1);
-  padding: .4rem .9rem;
+  padding: .5rem 1rem;
   border-radius: 999px;
   color: #fff;
   text-decoration: none;
-  font-size: .9rem;
+  font-size: clamp(.85rem, 2vw, 1rem);
   transition: var(--transition);
 }
 .nav-list a:hover,
@@ -124,6 +113,7 @@ header {
   width: 100%;
   height: auto;
   border-radius: var(--border-radius);
+  object-fit: cover;
   box-shadow: var(--shadow);
 }
 
@@ -132,12 +122,12 @@ header {
 ============================== */
 .navegacion-paginas {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: .6rem;
   padding: 1rem;
   background: var(--color-light);
-  flex-wrap: wrap;
 }
 .btn-pagina {
   padding: .5rem 1rem;
@@ -148,10 +138,7 @@ header {
   cursor: pointer;
   transition: var(--transition);
 }
-.btn-pagina:disabled {
-  background: #aaa;
-  cursor: not-allowed;
-}
+.btn-pagina:disabled { background: #aaa; cursor: not-allowed; }
 .indicador-pagina {
   font-weight: bold;
   font-size: .95rem;
@@ -182,7 +169,7 @@ header {
 .contenido-principal {
   max-width: var(--max-width);
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 1rem 1.2rem;
   background: var(--color-light);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -192,7 +179,7 @@ header {
 @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
 .seccion-titulo {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
   margin-bottom: 1rem;
   color: var(--color-primary);
   border-bottom: 2px solid var(--color-border);
@@ -205,14 +192,10 @@ header {
   text-align: justify;
   text-justify: inter-word;
 }
-.contenido-noticia ul {
-  padding-left: 1.2rem;
-}
-.noticia {
-  margin-bottom: 2rem;
-}
+.contenido-noticia ul { padding-left: 1.2rem; }
+.noticia { margin-bottom: 2rem; }
 .noticia h3 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin: 1rem 0 .5rem;
   color: var(--color-secondary);
 }
@@ -253,20 +236,26 @@ footer {
   cursor: pointer;
   display: none;
   box-shadow: var(--shadow);
+  z-index: 1000;
 }
 .btn-top.show { display: block; }
 
 /* ==============================
    Responsividad
 ============================== */
+@media (max-width: 992px) {
+  .header-top { flex-direction: column; text-align: center; }
+  .logo-img { max-width: 180px; }
+}
 @media (max-width: 768px) {
   .nav-list { flex-direction: column; align-items: center; }
-  .nav-list a { font-size: 1rem; }
-  .seccion-titulo { font-size: 1.5rem; }
+  .nav-list a { width: 100%; text-align: center; }
+  .contenido-principal { padding: 1rem; }
 }
 @media (max-width: 480px) {
   body { font-size: 15px; }
-  .seccion-titulo { font-size: 1.3rem; }
-  .btn-pagina, .pill { font-size: .8rem; }
+  .seccion-titulo { font-size: 1.2rem; }
+  .btn-pagina, .pill { font-size: .8rem; padding: .4rem .7rem; }
   .portada img { border-radius: 6px; }
+  .header-top { gap: .5rem; }
 }
