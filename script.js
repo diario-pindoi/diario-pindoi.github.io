@@ -1,37 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Loader ---
+  // ---------- Loader ----------
   const loader = document.getElementById('loader');
   setTimeout(() => {
-    if (loader) {
-      loader.style.opacity = '0';
-      setTimeout(()=> loader.style.display='none', 220);
-    }
-  }, 320);
+    if (loader) { loader.style.opacity = '0'; setTimeout(()=> loader.style.display = 'none', 220); }
+  }, 300);
 
-  // --- Fecha y hora ---
+  // ---------- Fecha y hora ----------
   function actualizarFechaHora(){
     const opciones = { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', hour12:false };
     const ahora = new Date();
-    const texto = ahora.toLocaleDateString('es-AR', opciones).replace(/, /g, ', ');
+    const fechaHora = ahora.toLocaleDateString('es-AR', opciones);
+    const fh = fechaHora.replace(/, (\d{1,2}):(\d{2})$/, ' | $1:$2');
     const nodo = document.getElementById('fechaHora');
-    if (nodo) nodo.textContent = texto;
+    if (nodo) nodo.textContent = fh;
   }
   actualizarFechaHora();
   setInterval(actualizarFechaHora, 60000);
 
-  // --- Precarga ligera de imágenes importantes ---
-  ['recursos/Logo.png','recursos/Diario.webp','img/feria-libro-1.jpg','img/presentacion-escolar-1.jpg'].forEach(src => {
-    const i = new Image(); i.src = src;
+  // ---------- Precarga ligera ----------
+  ['recursos/Logo.png','recursos/Diario.webp','img/feria-libro-1.jpg','img/presentacion-escolar-1.jpg'].forEach(src=>{
+    const img = new Image(); img.src = src;
   });
 
-  // --- Asegurar alt y lazy en imágenes ---
-  document.querySelectorAll('img').forEach(img => {
-    if (!img.alt || !img.alt.trim()) img.alt = 'Imagen ilustrativa del diario';
+  // ---------- Imagenes: accesibilidad & lazy ----------
+  document.querySelectorAll('img').forEach(img=>{
+    if (!img.alt || !img.alt.trim()) img.alt = 'Imagen ilustrativa del diario PINDOI';
     img.decoding = 'async';
     if (!img.loading) img.loading = 'lazy';
   });
 
-  // --- IntersectionObserver para revelar elementos (evita contenido "en blanco") ---
+  // ---------- IntersectionObserver para animaciones ----------
   const io = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -40,9 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.12 });
+
   document.querySelectorAll('.obs').forEach(el => io.observe(el));
 
-  // --- Elementos principales ---
+  // ---------- Paginación ----------
   const paginas = Array.from(document.querySelectorAll('.pagina'));
   const totalPaginas = paginas.length || 16;
   const spanTotal = document.getElementById('totalPaginas');
@@ -52,87 +51,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const indicador = document.getElementById('paginaActual');
   const btnPrev = document.getElementById('btnPaginaAnterior');
   const btnNext = document.getElementById('btnPaginaSiguiente');
-  const paginadorNumerico = document.querySelector('.paginador-numerico');
+  const paginador = document.querySelector('.paginador-numerico');
   const contenedorPaginas = document.getElementById('contenedorPaginas');
 
-  // --- Menú y overlay (declarados antes de usarse) ---
-  const navToggle = document.querySelector('.nav-toggle');
-  const navList = document.querySelector('.nav-list');
-  const navOverlay = document.getElementById('navOverlay');
-
-  // Funciones para abrir/cerrar menú
-  function openMenu(){
-    if (!navList || !navToggle || !navOverlay) return;
-    navList.classList.add('show');
-    navOverlay.classList.add('show');
-    navToggle.setAttribute('aria-expanded','true');
-    navOverlay.setAttribute('aria-hidden','false');
-    // evitar scroll en body cuando el menú está abierto (opcional)
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu(){
-    if (!navList || !navToggle || !navOverlay) return;
-    navList.classList.remove('show');
-    navOverlay.classList.remove('show');
-    navToggle.setAttribute('aria-expanded','false');
-    navOverlay.setAttribute('aria-hidden','true');
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-  }
-  function toggleMenu(){
-    if (!navList || !navToggle) return;
-    if (navList.classList.contains('show')) closeMenu();
-    else openMenu();
-  }
-
-  // Toggle por botón
-  if (navToggle) {
-    navToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu();
-    });
-  }
-
-  // Cerrar al tocar overlay
-  if (navOverlay) {
-    navOverlay.addEventListener('click', closeMenu);
-  }
-
-  // Cerrar con Escape
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeMenu();
-  });
-
-  // Cerrar menú al cambiar tamaño (si pasa a escritorio)
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      // asegurar que esté visible el nav en escritorio y no el panel móvil
-      if (navList) navList.classList.remove('show');
-      if (navOverlay) navOverlay.classList.remove('show');
-      if (navToggle) navToggle.setAttribute('aria-expanded','false');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-    }
-  });
-
-  // Crear botones numericos
+  // Crear pills
   function crearPills(){
-    if (!paginadorNumerico) return;
-    paginadorNumerico.innerHTML = '';
+    paginador.innerHTML = '';
     for (let i=1;i<=totalPaginas;i++){
       const b = document.createElement('button');
       b.className = 'pill';
       b.type = 'button';
+      b.role = 'tab';
       b.setAttribute('aria-selected', i===1 ? 'true' : 'false');
+      b.tabIndex = i===1 ? 0 : -1;
       b.textContent = String(i);
       b.addEventListener('click', ()=> cambiarPagina(i));
-      paginadorNumerico.appendChild(b);
+      paginador.appendChild(b);
     }
   }
   crearPills();
 
-  // Revelar elementos dentro de una pagina (stagger)
+  // Reveals dentro de una pagina (stagger)
   function revealElementsInPage(pageNum){
     const selector = `.pagina[data-pagina="${pageNum}"] .obs`;
     const elems = Array.from(document.querySelectorAll(selector));
@@ -141,17 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(()=> {
         el.classList.add('reveal');
         try { io.unobserve(el); } catch(e){}
-      }, idx * 60);
+      }, idx * 50);
     });
   }
 
-  // Scroll al contenedor y foco al título
+  // Scroll al contenedor de páginas y focus al título
   function scrollToContentAndFocus(pageNum){
     if (contenedorPaginas) {
       contenedorPaginas.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
     setTimeout(()=> {
       const activa = document.querySelector(`.pagina[data-pagina="${pageNum}"]`);
       if (activa) {
@@ -159,13 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (titulo) {
           titulo.setAttribute('tabindex', '-1');
           titulo.focus({ preventScroll: true });
-          setTimeout(()=> titulo.removeAttribute('tabindex'), 1200);
+          setTimeout(()=> { titulo.removeAttribute('tabindex'); }, 1200);
         }
       }
-    }, 360);
+    }, 350);
   }
 
-  // Cambiar de página (principal)
   function cambiarPagina(nueva){
     if (nueva < 1 || nueva > totalPaginas) return;
     paginas.forEach(p => p.classList.remove('pagina-activa'));
@@ -180,50 +119,36 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.pill').forEach((b, i) => {
       const sel = (i + 1) === paginaActual;
       b.setAttribute('aria-selected', String(sel));
+      b.tabIndex = sel ? 0 : -1;
     });
 
-    // actualizar hash sin forzar scroll del navegador
+    // actualizar hash sin saltar
     history.replaceState(null, '', `#p${paginaActual}`);
 
-    // revelar contenido de la pagina y desplazarse al contenedor
+    // reveal y scroll/focus
     revealElementsInPage(paginaActual);
     scrollToContentAndFocus(paginaActual);
   }
 
-  // Prev / Next
   if (btnPrev) btnPrev.addEventListener('click', ()=> cambiarPagina(paginaActual - 1));
   if (btnNext) btnNext.addEventListener('click', ()=> cambiarPagina(paginaActual + 1));
 
-  // Flechas teclado para paginar
+  // Flechas teclado
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') cambiarPagina(paginaActual - 1);
     if (e.key === 'ArrowRight') cambiarPagina(paginaActual + 1);
   });
 
-  // Enlaces del menu (data-goto)
-  document.querySelectorAll('a[data-goto]').forEach(a => {
-    a.addEventListener('click', (ev) => {
+  // Enlaces del menu
+  document.querySelectorAll('a[data-goto]').forEach(a=>{
+    a.addEventListener('click', (ev)=>{
       ev.preventDefault();
       const n = Number(a.getAttribute('data-goto')) || 1;
       cambiarPagina(n);
-
-      // cerrar menú en móviles al hacer clic
-      if (window.innerWidth <= 768) {
-        closeMenu();
-      }
     });
   });
 
-  // También cerrar el menú al hacer clic en cualquier enlace dentro del nav (por si hay otros)
-  if (navList) {
-    navList.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) closeMenu();
-      });
-    });
-  }
-
-  // Si hay hash al cargar, abrir esa página
+  // Abrir hash si existe
   if (location.hash && /^#p(\d+)$/.test(location.hash)){
     const n = Number(location.hash.replace('#p',''));
     if (n >= 1 && n <= totalPaginas) cambiarPagina(n);
@@ -236,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnTop = document.getElementById('btnTop');
   function toggleTop(){ if (window.scrollY > 450) btnTop.classList.add('show'); else btnTop.classList.remove('show'); }
   window.addEventListener('scroll', toggleTop);
-  if (btnTop) btnTop.addEventListener('click', ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
+  if (btnTop) btnTop.addEventListener('click', ()=> {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
 });
